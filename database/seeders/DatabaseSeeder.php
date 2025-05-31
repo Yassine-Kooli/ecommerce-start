@@ -13,11 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->command->info('🌱 Starting database seeding...');
 
+        // Create admin user
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin User',
+            'email' => 'admin@ecomstore.com',
         ]);
+
+        $this->command->info('✅ Admin user created');
+
+        // Run comprehensive ecommerce seeding
+        $this->call([
+            EcommerceSeeder::class,
+        ]);
+
+        $this->command->info('🎉 Database seeding completed successfully!');
     }
 }

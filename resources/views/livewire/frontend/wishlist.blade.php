@@ -104,8 +104,15 @@
                 </svg>
                 <h3 class="mt-2 text-sm font-medium text-gray-900">Please login to view your wishlist</h3>
                 <p class="mt-1 text-sm text-gray-500">You need to be logged in to save and view your favorite products.</p>
-                <div class="mt-6">
-                    <livewire:frontend.components.auth-modal />
+                <div class="mt-6 flex justify-center space-x-4">
+                    <a href="{{ route('login') }}"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                        Login
+                    </a>
+                    <a href="{{ route('register') }}"
+                        class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-4 py-2 rounded-md text-sm font-medium">
+                        Register
+                    </a>
                 </div>
             </div>
         @endauth

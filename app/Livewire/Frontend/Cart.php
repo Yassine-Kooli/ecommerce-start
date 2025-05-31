@@ -5,56 +5,15 @@ namespace App\Livewire\Frontend;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use TomatoPHP\FilamentEcommerce\Models\Cart as CartModel;
-use TomatoPHP\FilamentEcommerce\Models\Product;
 
 #[Layout('components.layouts.app')]
 class Cart extends Component
 {
-    protected $listeners = ['add-to-cart' => 'addToCart'];
+    protected $listeners = ['cart-updated' => 'updateCartCount'];
 
-    public function addToCart($productId, $quantity = 1)
+    public function updateCartCount()
     {
-        $product = Product::find($productId);
-
-        if (! $product) {
-            return;
-        }
-
-        $cartData = [
-            'product_id' => $product->id,
-            'item' => $product->name['en'] ?? 'Product',
-            'price' => $product->price,
-            'discount' => $product->discount ?? 0,
-            'qty' => $quantity,
-            'total' => ($product->price - ($product->discount ?? 0)) * $quantity,
-            'session_id' => session()->getId(),
-        ];
-
-        if (auth('account')->check()) {
-            $cartData['account_id'] = auth('account')->id();
-        }
-
-        // Check if item already exists in cart
-        $existingCart = CartModel::where('product_id', $product->id)
-            ->where(function ($query) {
-                if (auth('account')->check()) {
-                    $query->where('account_id', auth('account')->id());
-                } else {
-                    $query->where('session_id', session()->getId());
-                }
-            })
-            ->first();
-
-        if ($existingCart) {
-            $existingCart->update([
-                'qty' => $existingCart->qty + $quantity,
-                'total' => ($product->price - ($product->discount ?? 0)) * ($existingCart->qty + $quantity),
-            ]);
-        } else {
-            CartModel::create($cartData);
-        }
-
-        $this->dispatch('cart-updated');
+        // This method will trigger cart counter updates when called
     }
 
     public function updateQuantity($cartId, $quantity)

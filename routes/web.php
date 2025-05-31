@@ -3,6 +3,8 @@
 use App\Livewire\Frontend\Account\Dashboard;
 use App\Livewire\Frontend\Account\Orders;
 use App\Livewire\Frontend\Account\Profile;
+use App\Livewire\Frontend\Auth\Login;
+use App\Livewire\Frontend\Auth\Register;
 use App\Livewire\Frontend\Cart;
 use App\Livewire\Frontend\Checkout;
 use App\Livewire\Frontend\HomePage;
@@ -33,13 +35,8 @@ Route::get('/search', ProductCatalog::class)->name('search');
 
 // Account Authentication Routes
 Route::middleware('guest:account')->group(function () {
-    Route::get('/login', function () {
-        return view('frontend.auth.login');
-    })->name('login');
-
-    Route::get('/register', function () {
-        return view('frontend.auth.register');
-    })->name('register');
+    Route::get('/login', Login::class)->name('login');
+    Route::get('/register', Register::class)->name('register');
 });
 
 // Account Routes

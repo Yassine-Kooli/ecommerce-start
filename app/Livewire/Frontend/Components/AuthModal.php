@@ -99,8 +99,11 @@ class AuthModal extends Component
         $account = Account::create([
             'name' => $this->name,
             'email' => $this->register_email,
+            'username' => $this->register_email, // Use email as username
             'password' => Hash::make($this->register_password),
             'phone' => $this->phone,
+            'type' => 'account',
+            'loginBy' => 'email',
             'is_active' => true,
         ]);
 

@@ -9,7 +9,7 @@ class CartCounter extends Component
 {
     public $cartCount = 0;
 
-    protected $listeners = ['add-to-cart' => 'updateCartCount'];
+    protected $listeners = ['add-to-cart' => 'updateCartCount', 'cart-updated' => 'updateCartCount'];
 
     public function mount()
     {

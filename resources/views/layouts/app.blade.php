@@ -96,7 +96,16 @@
                             </div>
                         </div>
                     @else
-                        <livewire:frontend.components.auth-modal />
+                        <div class="flex items-center space-x-4">
+                            <a href="{{ route('login') }}"
+                                class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+                                Login
+                            </a>
+                            <a href="{{ route('register') }}"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Register
+                            </a>
+                        </div>
                     @endauth
 
                     <!-- Mobile menu button -->

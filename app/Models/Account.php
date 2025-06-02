@@ -89,4 +89,20 @@ class Account extends Authenticatable implements HasAvatar, HasMedia
     {
         return $this->getFirstMediaUrl('avatar') ?? null;
     }
+
+    /**
+     * Get the orders for the account.
+     */
+    public function orders()
+    {
+        return $this->hasMany(\TomatoPHP\FilamentEcommerce\Models\Order::class);
+    }
+
+    /**
+     * Get the cart items for the account.
+     */
+    public function carts()
+    {
+        return $this->hasMany(\TomatoPHP\FilamentEcommerce\Models\Cart::class);
+    }
 }
